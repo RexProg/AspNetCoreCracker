@@ -3,15 +3,11 @@ A multi thread tool to attempt to crack ASP.NET Core Identity hashes
 
 ## Usage
 ```
-USAGE:
-Attempt to crack a list of hashes:
-  AspNetCoreCracker --hashes hashes.txt --passwords passwords.txt
+  --hashes or -h       Required. The path to a file with a list of hashes to crack.
 
-  --hashes       Required. The path to a file with a list of hashes to crack.
+  --passwords or -p    Required. The path to a file with a list of passwords to hash.
 
-  --passwords    Required. The path to a file with a list of passwords to hash.
-
-  --thread       Optional. The count of thread used to work
+  --thread or -t       Optional. The count of thread used to work
 ```
 
 ## Prerequisite
