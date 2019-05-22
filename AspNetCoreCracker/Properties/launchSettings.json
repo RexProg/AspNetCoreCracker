@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "AspNetCoreCracker": {
+      "commandName": "Project",
+      "commandLineArgs": "--hashes .\\hashes.txt --passwords .\\passwords.txt -t 10"
+    }
+  }
+}
