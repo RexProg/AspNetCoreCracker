@@ -19,13 +19,14 @@ Tested on Windows 10 x64 and Ubuntu 18.04.2 x64.
 `dotnet run -h hashes.txt -p passwords.txt -t 10`
 
 ```
-[+] Cracked Hash: 15
-[+] Checked Hash: 1344
-[+] Current Hash: AKF4m8tri6iAad73szDdoBU3fXDALi3h6pTpf2o9WYo50scTPo/3CclPsBDsrLPrOQ==
-[+] Hash/Min: 542
-[+] Check/Sec: 8752
-[+] Progress: 1344/20026 7%
-[+] Time: 3m 3s
+[+] Cracked Hash: 86
+[+] Checked Hash: 1189
+[+] Current Hash: ACMT/36DJzuUByPbe8hhT0pbvb8NlwgO7Me1NiQlHURjba06L5Lki/n3SYdYflY0ww==
+[+] Hash/Min: 922
+[+] Check/Sec: 4496
+[+] Progress: 310211/710424 44%
+[+] Time: 1m 18s
+[+] Remaining time: 1m 30s
 
 [P] Pause - [R] Resume - [S] Save
 ```
