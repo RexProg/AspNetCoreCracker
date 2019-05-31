@@ -14,6 +14,7 @@ namespace AspNetCoreCracker
         public static int HashPerMin;
         public static int CheckPerSec;
         public static int CheckedHash;
+        public static int CheckedPass;
         public static int CrackedHash;
         public static string CurrentHash;
 
@@ -81,13 +82,15 @@ namespace AspNetCoreCracker
             (printTimer = new Timer(2000)).Elapsed += (sender, args) =>
             {
                 Console.Clear();
+                var remainingTime = HashPerMin == 0 ? "Wait to calculate" : TimeSpan.FromMinutes((double)(hashes.Length - CheckedHash) / HashPerMin).TimeSpanToString();
                 Console.Write($@"[+] Cracked Hash: {CrackedHash}
 [+] Checked Hash: {CheckedHash}
 [+] Current Hash: {CurrentHash}
 [+] Hash/Min: {HashPerMin}
 [+] Check/Sec: {CheckPerSec}
-[+] Progress: {CheckedHash}/{hashes.Length} {Math.Round((double) CheckedHash / hashes.Length * 100)}%
-[+] Time: {stopwatch.Elapsed.TimeSpanToString()}
+[+] Progress: {CheckedPass}/{hashes.Length * passwords.Length} {Math.Round(((double) CheckedPass / (hashes.Length * passwords.Length)) * 100)}%
+[+] Time: {stopwatch.Elapsed.TimeSpanToString()} 
+[+] Remaining time: {remainingTime}
 
 [P] Pause - [R] Resume - [S] Save
 ");
@@ -96,17 +99,18 @@ namespace AspNetCoreCracker
 
             _threadGun = new ThreadGun<string>(hash =>
                 {
-                    _tempHashPerMin++;
-                    CheckedHash++;
-                    CurrentHash = hash;
                     Parallel.ForEach(passwords, (password, state) =>
                     {
+                        CheckedPass++;
                         _tempCheckPerSec++;
                         if (!Crypto.VerifyHashedPassword(hash, password)) return;
                         _result.Add(hash + ":" + password);
                         CrackedHash++;
                         state.Break();
                     });
+                    _tempHashPerMin++;
+                    CheckedHash++;
+                    CurrentHash = hash;
                 }, hashes, int.Parse(options.ThreadCount)
                 , inputs =>
                 {
